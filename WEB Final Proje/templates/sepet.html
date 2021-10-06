@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <title>GunsteR-Sepet</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
+<style>
+
+
+
+  {
+  background-color: #ffffff;
+}
+li
+{
+  list-style-type: none;
+  margin-left: 1vw;
+}
+
+li:first-child
+{
+  margin:0;
+}
+
+footer
+{
+
+  padding-top: 5vh;
+  padding-bottom: 2vh;
+}
+
+.content
+{
+  height: 50vh;
+  background-color: #ffffff;
+}
+
+.container
+{
+  background-color: #272034;
+}
+
+.copyright,  .impressum
+{
+  text-align: center;
+}
+
+.logo
+{
+  height: 8vh;
+}
+
+@media (max-width: 768px)
+{
+  li
+  {
+    margin-left: 0;
+    margin-bottom: 1vh;
+  }
+
+  .sozial
+  {
+    margin-bottom: 1vh;
+  }
+}
+.btn-costumes {
+  background-color: #272034;
+}
+
+.navbar-custom {
+    background-color: #272034;
+    font-size: 27px;
+}
+/* change the brand and text color */
+.navbar-custom .navbar-brand,
+.navbar-custom .navbar-text {
+    color: rgba(255, 255, 255, 0.8);
+}
+/* change the link color */
+.navbar-custom .navbar-nav .nav-link {
+    color: rgba(255, 255, 255, 0.8);
+}
+/* change the color of active or hovered links */
+.navbar-custom .nav-item.active .nav-link,
+.navbar-custom .nav-item:hover .nav-link {
+    color: #ffffff;
+}
+</style>
+</head>
+<body>
+
+<div style="background-color: black" align="center">
+    <img src="/static/banner3.jpg" width="920" height="250">
+  </div>
+<nav class="navbar navbar-expand-sm navbar-custom">
+
+<!-- Links -->
+  <ul class="navbar-nav">
+      <!-- Navbar text-->
+    <li class="nav-item">
+      <b><a style="color: #ffffff" class="nav-link active" href="/">GunsteR</a></b>
+    </li>
+    <li class="nav-item dropdown">
+        <a style="color: #ffffff" class="nav-link dropdown-toggle" href="/ürünler" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          Ürünler
+        </a>
+
+        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+          <a style="color: #000000" target="_blank" class="dropdown-item" href="/kategori/telefon">Telefon</a>
+          <a style="color: #000000" target="_blank" class="dropdown-item" href="/kategori/akilli_saat">Akıllı Saat</a>
+          <a style="color: #000000" target="_blank" class="dropdown-item" href="/kategori/telefon_kilif">Telefon Kılıfları</a>
+          <a style="color: #000000" target="_blank" class="dropdown-item" href="/kategori/kulakliklar">Kulaklıklar</a>
+        </div>
+      </li>
+    <li class="nav-item">
+      <a style="color: #ffffff" class="nav-link" href="/hakkimizda">Hakkımızda</a>
+    </li>
+    <li class="nav-item">
+      <a style="color: #ffffff" class="nav-link" href="/sepet">Sepet</a>
+    </li>
+    {% if kullanici['rol'] == 'yonetici' %}
+    <li class="nav-item">
+      <a class="nav-link" href="/uruntanimla">Ürün Tanımla</a>
+    </li>
+    {% endif %}
+
+
+  </ul>
+  {% if kullanici %}
+  <ul class="navbar-nav ml-auto">
+    <li class="nav-item">
+      <a class="nav-link" href="/cikis"> Merhaba {{kullanici['ad']}} - Çıkış yap</a>
+    </li>
+  </ul>
+  {% else %}
+  <ul class="navbar-nav ml-auto">
+    <li class="nav-item">
+      <a style="color: #ffffff" class="nav-link" href="/giris"> Kullanıcı Girişi</a>
+    </li>
+  </ul>
+  {% endif %}
+</nav>
+
+<p>
+  <div class="container-fluid">
+      <h3>Sepet</h3>
+</p>
+
+  <table class="table table-hover">
+    <thead>
+      <tr>
+        <th>Ürün</th>
+        <th>Kategori</th>
+        <th>Fiyat</th>
+        <th>-</th>
+      </tr>
+    </thead>
+    <tbody>
+    {%for urun in sepet_urunleri%}
+      <tr>
+        <td>{{urun["urun"]["ad"]}}</td>
+        <td>{{urun["urun"]["kategori"]}}</td>
+        <td>{{urun["urun"]["fiyat"]}}₺</td>
+        <td>
+          <form action="/sepettencikar" method="post">
+              <input type="hidden" id="_id" name="_id" value='{{urun["_id"]}}'>
+              <button type="submit" class="btn"><i class="fas fa-trash"></i></button>
+            </form>
+
+        </td>
+      </tr>
+    {%endfor%}
+    </tbody>
+  </table>
+
+  <a style="color: white" href="/satinal" class="btn btn-costumes btn-block">Satın Al</a>
+
+
+
+
+
+
+</div>
+<p>
+<div style="background-color: #272034">
+  <div class="container">
+    <footer class="row">
+      <div class="sozial col-xs-12 col-sm-6 col-sm-push-6">
+        <ul class="row">
+          <li class="col-xs-6 col-sm-2">
+            <a target="_blank" href="https://www.facebook.com/GunsteR61">
+              <img class="logo" src="https://cdn2.iconfinder.com/data/icons/black-white-social-media/32/online_social_media_facebook-128.png">
+            </a>
+          </li>
+          <li class="col-xs-6 col-sm-2">
+            <a target="_blank" href="https://twitter.com/mur_atsiz">
+              <img class="logo" src="https://cdn2.iconfinder.com/data/icons/black-white-social-media/32/twitter_online_social_media-128.png">
+            </a>
+          </li>
+          <li class="col-xs-6 col-sm-2">
+            <a target="_blank" href="https://www.instagram.com/muratlmdr/">
+              <img class="logo" src="https://cdn2.iconfinder.com/data/icons/black-white-social-media/32/instagram_online_social_media_photo-128.png">
+            </a>
+          </li>
+          <li class="col-xs-6 col-sm-2">
+            <a target="_blank" href="https://wa.me/5382798022">
+              <img class="logo" src="https://cdn2.iconfinder.com/data/icons/black-white-social-media/64/social_media_logo_whatsapp-128.png">
+            </a>
+          </li>
+        </ul>
+      </div><!-- Ende Sozial media -->
+
+      <div class="copyright col-xs-12 col-sm-3 col-sm-pull-6">
+        <p style="color: white"> &copy; 2021 Hakları Sakladır -GunsteR- </p>
+      </div><!-- Ende Copyright -->
+
+      <div class="impressum col-xs-12 col-sm-3 col-sm-pull-6">
+        <p style="color: white"> Wir sind immer hier... </p>
+        <p style="color: white"><a style="color: white" target="_blank" href="https://goo.gl/maps/JncSqbyFAmcub1C99">Adres için tıklayınız...</a> </p>
+      </div><!-- Ende Impressum -->
+    </footer>
+  </div>
+</div>
+</p>
+</body>
+</html>

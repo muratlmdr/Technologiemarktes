@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <title>GunsteR-Ürünler</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<style>
+
+  {
+  background-color: #ffffff;
+}
+li
+{
+  list-style-type: none;
+  margin-left: 1vw;
+}
+
+li:first-child
+{
+  margin:0;
+}
+
+footer
+{
+  padding-top: 5vh;
+  padding-bottom: 2vh;
+}
+
+.content
+{
+  height: 50vh;
+  background-color: #ffffff;
+}
+
+.container
+{
+  background-color: #272034;
+}
+
+.copyright,  .impressum
+{
+  text-align: center;
+}
+
+.logo
+{
+  height: 8vh;
+}
+
+@media (max-width: 768px)
+{
+  li
+  {
+    margin-left: 0;
+    margin-bottom: 1vh;
+  }
+
+  .sozial
+  {
+    margin-bottom: 1vh;
+  }
+}
+.btn-costumes {
+  background-color: #272034;
+}
+.text-uppercase {
+  color: white;
+}
+
+.navbar-custom {
+  background-color: #272034;
+  font-size: 27px;
+}
+/* change the brand and text color */
+.navbar-custom .navbar-brand,
+.navbar-custom .navbar-text {
+    color: rgba(255, 255, 255, 0.8);
+}
+/* change the link color */
+.navbar-custom .navbar-nav .nav-link {
+    color: rgba(255, 255, 255, 0.8);
+}
+/* change the color of active or hovered links */
+.navbar-custom .nav-item.active .nav-link,
+.navbar-custom .nav-item:hover .nav-link {
+    color: #ffffff;
+}
+</style>
+
+
+</style>
+
+</head>
+<body>
+  <div style="background-color: black" align="center">
+    <img src="/static/banner3.jpg" width="920" height="250">
+  </div>
+<nav class="navbar navbar-expand-sm navbar-custom">
+
+<!-- Links -->
+  <ul class="navbar-nav">
+      <!-- Navbar text-->
+    <li class="nav-item">
+      <b><a style="color: white" class="nav-link active" href="/">GunsteR</a></b>
+    </li>
+    <li class="nav-item dropdown">
+        <a style="color: white" class="nav-link dropdown-toggle" href="/ürünler" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          Ürünler
+        </a>
+
+        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+          <a style="color: black" class="nav-link {{'active' if kategori == 'telefon' }}" href="/kategori/telefon">Telefon</a>
+          <a style="color: black" class="nav-link {{'active' if kategori == 'akilli_saat' }}" href="/kategori/akilli_saat">Akıllı Saat</a>
+          <a style="color: black" class="nav-link {{'active' if kategori == 'telefon_kilif' }}" href="/kategori/telefon_kilif">Telefon Kılıfları</a>
+          <a style="color: black" class="nav-link {{'active' if kategori == 'kulakliklar' }}" href="/kategori/kulakliklar">Kulaklıklar</a>
+        </div>
+      </li>
+    <li class="nav-item">
+      <a style="color: #ffffff" class="nav-link" href="/hakkimizda">Hakkımızda</a>
+    </li>
+    <li  class="nav-item">
+      <a style="color: white" class="nav-link" href="/sepet">Sepet</a>
+    </li>
+    {% if kullanici['rol'] == 'yonetici' %}
+    <li class="nav-item">
+      <a class="nav-link" href="/uruntanimla">Ürün Tanımla</a>
+    </li>
+    {% endif %}
+
+
+  </ul>
+  {% if kullanici %}
+  <ul class="navbar-nav ml-auto">
+    <li class="nav-item">
+      <a class="nav-link" href="/cikis"> Merhaba {{kullanici['ad']}} - Çıkış yap</a>
+    </li>
+  </ul>
+  {% else %}
+  <ul class="navbar-nav ml-auto">
+    <li class="nav-item">
+      <a style="color: white" class="nav-link" href="/giris"> Kullanıcı Girişi</a>
+    </li>
+  </ul>
+  {% endif %}
+</nav>
+
+<p>
+  <div align="center">
+      <div id="demo" class="carousel slide" data-ride="carousel">
+        <ul class="carousel-indicators">
+          <li data-target="#demo" data-slide-to="0" class="active"></li>
+          <li data-target="#demo" data-slide-to="1"></li>
+          <li data-target="#demo" data-slide-to="2"></li>
+          <li data-target="#demo" data-slide-to="3"></li>
+          <li data-target="#demo" data-slide-to="4"></li>
+          <li data-target="#demo" data-slide-to="5"></li>
+          <li data-target="#demo" data-slide-to="6"></li>
+          <li data-target="#demo" data-slide-to="7"></li>
+          <li data-target="#demo" data-slide-to="8"></li>
+          <li data-target="#demo" data-slide-to="9"></li>
+        </ul>
+        <div class="carousel-inner">
+          <div class="carousel-item active">
+            <img src="/static/kampanya2.jpg" alt="Los Angeles" width="1100" height="500">
+            <div class="carousel-caption">
+              <h3>iPhone 12 Pro</h3>
+              <p>Kırılmak yok, en sağlamı bu.</p>
+            </div>
+          </div>
+          <div class="carousel-item">
+            <img src="/static/kampanya3.jpg" alt="Chicago" width="1100" height="500">
+            <div class="carousel-caption">
+              <h3>Samsung S20 Ultra</h3>
+              <p>Sevdiğin her şey için istediğin her şey onda.</p>
+            </div>
+          </div>
+          <div class="carousel-item">
+            <img src="/static/kampanya4.jpg" alt="New York" width="1100" height="500">
+            <div class="carousel-caption">
+              <h3>Huawei Watch GT 2</h3>
+              <p>Hiç Çıkarma!</p>
+            </div>
+          </div>
+          <div class="carousel-item">
+            <img src="/static/kampanya5.jpg" alt="New York" width="1100" height="500">
+            <div class="carousel-caption">
+              <h3>Apple Watch Series 6</h3>
+              <p>Sağlığın geleceği bileğinize geldi.</p>
+            </div>
+          </div>
+          <div class="carousel-item">
+            <img src="/static/kampanya6.jpg" alt="New York" width="1100" height="500">
+            <div class="carousel-caption">
+              <h3>Galaxy Watch3 Bluetooth</h3>
+              <p>En gelişmiş dijital doktorunuz akıllı saatinizle her zaman yanınızda.</p>
+            </div>
+          </div>
+          <div class="carousel-item">
+            <img src="/static/kampanya7.jpg" alt="New York" width="1100" height="500">
+            <div class="carousel-caption">
+              <h3>Apple Kılıf</h3>
+              <p>Apple için tasarlandı</p>
+            </div>
+          </div>
+          <div class="carousel-item">
+            <img src="/static/kampanya8.jpg" alt="New York" width="1100" height="500">
+            <div class="carousel-caption">
+              <h3>Deri Kılıf</h3>
+              <p>Prestij!</p>
+            </div>
+          </div>
+          <div class="carousel-item">
+            <img src="/static/kampanya9.jpg" alt="New York" width="1100" height="500">
+            <div class="carousel-caption">
+              <h3>Apple AirPods 2</h3>
+              <p>Her zamankinden daha sihirli.</p>
+            </div>
+          </div>
+          <div class="carousel-item">
+            <img src="/static/kampanya10.jpg" alt="New York" width="1100" height="500">
+            <div class="carousel-caption">
+              <h3>Galaxy Buds Pro</h3>
+              <p>Epik ses, epik tasarım gerektirir.</p>
+            </div>
+          </div>
+          <div class="carousel-item">
+            <img src="/static/kampanya12.jpg" alt="New York" width="1100" height="500">
+            <div class="carousel-caption">
+              <h3>Sennheiser</h3>
+              <p>Önceliğiniz ses olsun!</p>
+            </div>
+          </div>
+        </div>
+        <a class="carousel-control-prev" href="#demo" data-slide="prev">
+          <span class="carousel-control-prev-icon"></span>
+        </a>
+        <a class="carousel-control-next" href="#demo" data-slide="next">
+          <span class="carousel-control-next-icon"></span>
+        </a>
+      </div>
+
+</div>
+</p>
+
+
+
+
+<div class="container-fluid">
+
+  <h3>Kategorideki Ürünler</h3>
+
+  <div class="row wow fadeIn">
+
+  {%for urun in urunler%}
+
+    <div class="col-lg-4 col-md-6 mb-4">
+            <!--Card-->
+            <div class="card">
+
+              <!--Card image-->
+              <div class="view overlay">
+                    <div align="center"> <img src='{{urun["fotograf"]}}' class="card-img-top" style="height:280px;width:320px" alt="">
+                <a>
+
+                  <div class="mask rgba-white-slight"></div>
+                </a>
+                    </div>
+              </div>
+              <!--Card image-->
+
+              <!--Card content-->
+              <div class="card-body text-center">
+                <!--Category & Title-->
+                <h5>
+                  <strong>
+                    <span class="dark-grey-text">
+                      {{urun["ad"]}}
+                    </span>
+                  </strong>
+                </h5>
+                <span class="grey-text">
+                  <h5>{{urun["aciklama"]}}</h5>
+                </span>
+
+
+                <p class="card-text">Stok durumu: {{urun["stok"]}} {{urun["stok_birim"]}}</p>
+
+                <h4 class="font-weight-bold blue-text">
+                  <strong>{{urun["fiyat"]}}₺</strong>
+                </h4>
+
+                <form action="/sepeteekle" method="post">
+        <input type="hidden" id="urun_id" name="urun_id" value='{{urun["_id"]}}'>
+        <button type="submit" class="btn btn-block btn-costumes text-uppercase">Sepete Ekle</button>
+      </form>
+
+              </div>
+              <!--Card content-->
+
+            </div>
+            <!--Card-->
+
+          </div>
+
+
+
+  {%endfor%}
+
+
+  </div>
+
+
+</div>
+<div style="background-color: #272034">
+  <div class="container">
+    <footer class="row">
+      <div class="sozial col-xs-12 col-sm-6 col-sm-push-6">
+        <ul class="row">
+          <li class="col-xs-6 col-sm-2">
+            <a target="_blank" href="https://www.facebook.com/GunsteR61">
+              <img class="logo" src="https://cdn2.iconfinder.com/data/icons/black-white-social-media/32/online_social_media_facebook-128.png">
+            </a>
+          </li>
+          <li class="col-xs-6 col-sm-2">
+            <a target="_blank" href="https://twitter.com/mur_atsiz">
+              <img class="logo" src="https://cdn2.iconfinder.com/data/icons/black-white-social-media/32/twitter_online_social_media-128.png">
+            </a>
+          </li>
+          <li class="col-xs-6 col-sm-2">
+            <a target="_blank" href="https://www.instagram.com/muratlmdr/">
+              <img class="logo" src="https://cdn2.iconfinder.com/data/icons/black-white-social-media/32/instagram_online_social_media_photo-128.png">
+            </a>
+          </li>
+          <li class="col-xs-6 col-sm-2">
+            <a target="_blank" href="https://wa.me/5382798022">
+              <img class="logo" src="https://cdn2.iconfinder.com/data/icons/black-white-social-media/64/social_media_logo_whatsapp-128.png">
+            </a>
+          </li>
+        </ul>
+      </div><!-- Ende Sozial media -->
+
+      <div class="copyright col-xs-12 col-sm-3 col-sm-pull-6">
+        <p style="color: white"> &copy; 2021 Hakları Sakladır -GunsteR- </p>
+      </div><!-- Ende Copyright -->
+
+      <div class="impressum col-xs-12 col-sm-3 col-sm-pull-6">
+        <p style="color: white"> Wir sind immer hier... </p>
+        <p style="color: white"><a style="color: white" target="_blank" href="https://goo.gl/maps/JncSqbyFAmcub1C99">Adres için tıklayınız...</a> </p>
+      </div><!-- Ende Impressum -->
+    </footer>
+  </div>
+</div>
+
+
+
+</body>
+</html>

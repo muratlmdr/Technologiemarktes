@@ -1,0 +1,1 @@
+db.getCollection('sepet_urunleri').find({})
