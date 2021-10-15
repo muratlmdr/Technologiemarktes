@@ -13,6 +13,7 @@ kullanicilar_tablosu = mydb["kullanicilar"]
 urunler_tablosu = mydb["urunler"]
 sepet_urunleri_tablosu = mydb["sepet_urunleri"]
 
+
 @app.route('/')
 def baslangic():
     kullanici = None
@@ -24,7 +25,7 @@ def baslangic():
     return render_template("anasayfa.html", urunler=haftanin_firsatlari, kullanici=kullanici)
 
 
-@app.route('/giris', methods=['GET','POST'])
+@app.route('/giris', methods=['GET', 'POST'])
 def giris():
     if request.method == 'POST':
         kullanici = request.form['kullanici']
@@ -56,7 +57,7 @@ def kategori_goster(kategori):
         kullanici = session["kullanici"]
 
     kategori_urunleri = urunler_tablosu.find({"kategori": kategori})
-    return render_template("kategori.html", kullanici=kullanici,kategori=kategori, urunler=kategori_urunleri)
+    return render_template("kategori.html", kullanici=kullanici, kategori=kategori, urunler=kategori_urunleri)
 
 
 @app.route('/sepeteekle', methods=['POST'])
@@ -77,6 +78,7 @@ def sepete_ekle():
     print(kaydedilmis.inserted_id)
     return redirect("/sepet", code=302)
 
+
 @app.route('/sepettencikar', methods=['POST'])
 def sepetten_cikar():
     if 'kullanici' not in session:
@@ -86,10 +88,10 @@ def sepetten_cikar():
 
     _id = request.form.get('_id')
 
-
     sepet_urunu = {"_id": ObjectId(_id)}
     sepet_urunleri_tablosu.delete_one(sepet_urunu)
     return redirect("/sepet", code=302)
+
 
 @app.route('/hakkimizda')
 def hakkimizda():
@@ -97,6 +99,7 @@ def hakkimizda():
     if 'kullanici' in session:
         kullanici = session["kullanici"]
     return render_template("hakkimizda.html", kullanici=kullanici)
+
 
 @app.route('/sepet')
 def sepet():
@@ -106,6 +109,7 @@ def sepet():
         kullanici = session["kullanici"]
         sepet_urunleri = list(sepet_urunleri_tablosu.find({"kullanici": kullanici["_id"]}))
         return render_template("sepet.html", kullanici=kullanici, sepet_urunleri=sepet_urunleri)
+
 
 @app.route('/satinal')
 def satin_al():
@@ -124,15 +128,12 @@ def satin_al():
 
             urunler_tablosu.update_one(sorgu, yenideger)
 
-
-
         silmesorgusu = {"kullanici": kullanici["_id"]}
         x = sepet_urunleri_tablosu.delete_many(silmesorgusu)
         return "Alınan ürün sayısı: " + str(x.deleted_count)
 
 
-
-@app.route('/uruntanimla', methods=['GET','POST'])
+@app.route('/uruntanimla', methods=['GET', 'POST'])
 def urun_tanimla():
     if request.method == 'POST':
 
