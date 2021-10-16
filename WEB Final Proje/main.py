@@ -3,8 +3,6 @@ import datetime
 from flask import Flask, render_template, request, redirect, session
 import pymongo
 from bson.objectid import ObjectId
-#pc arası dosya aktarma denemesi vol 1
-#pc arası aktarma başarılı
 
 app = Flask(__name__)
 app.secret_key = 'GunsteR'
